@@ -1,7 +1,6 @@
 const API = "http://localhost:3000";
 
-const token = localStorage.getItem('token');
-if (!token) {
+if (!localStorage.getItem('token')) {
     window.location.href = 'Login.html';
 }
 
@@ -25,46 +24,70 @@ async function obtenerDatos(ruta) {
 }
 
 async function enviarDatos(ruta, metodo, datos) {
-    const res = await fetch(`${API}/${ruta}`, {
-        method: metodo,
-        headers: {
-            "Content-Type": "application/json",
-            'Authorization': 'Bearear '+token
-        },
-        body: JSON.stringify(datos)
-    });
-
-    const data = await res.json();
-
-    if (!res.ok) {
-        console.error(data);
-        alert(data.error || "Error en el servidor");
+    try {
+        const res = await fetch(`${API}/${ruta}`, {
+            method: metodo,
+            headers: {
+                "Content-Type": "application/json",
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            },
+            body: JSON.stringify(datos)
+        });
+ 
+        const data = await res.json();
+ 
+        if (res.status === 401) {
+            alert("Sesión expirada");
+            logout();
+            return null;
+        }
+ 
+        if (!res.ok) {
+            console.error(data);
+            alert(data.error || "Error en el servidor");
+            return null;
+        }
+ 
+        return data;
+ 
+    } catch (error) {
+        console.error("Error al enviar datos: " + error);
         return null;
     }
-
-    return data;
 }
-
+ 
 async function eliminarDatos(ruta) {
-    const res = await fetch(`${API}/${ruta}`, {
-        method: "DELETE",
-        headers: {
-            "Content-Type": "application/json",
-            'Authorization': 'Bearear '+token
-        },
-    });
-
-    const data = await res.json();
-
-    if (!res.ok) {
-        console.error(data);
-        alert(data.error || "Error en el servidor");
+    try {
+        const res = await fetch(`${API}/${ruta}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            },
+        });
+ 
+        const data = await res.json();
+ 
+        if (res.status === 401) {
+            alert("Sesión expirada");
+            logout();
+            return null;
+        }
+ 
+        if (!res.ok) {
+            console.error(data);
+            alert(data.error || "Error en el servidor");
+            return null;
+        }
+ 
+        return data;
+ 
+    } catch (error) {
+        console.error("Error al eliminar datos: " + error);
         return null;
     }
-
-    return data;
 }
-
+ 
 /* ESPECIALIDADES */
 
 async function cargarEspecialidades() {
@@ -622,7 +645,7 @@ function formatearFecha(fecha) {
 
 function logout(){  
     localStorage.removeItem("token");
-    window.Location.href="Login.html";
+    window.location.href="Login.html";
 }
 
 cargarEspecialidades();
