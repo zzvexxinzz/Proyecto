@@ -1,0 +1,370 @@
+/* ============================================================
+   Sistema de Citas Médicas — Estilos principales
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+:root {
+    --blue-primary:  #3b9eda;
+    --blue-mid:      #2e86c7;
+    --blue-dark:     #1a6eaa;
+    --blue-light:    #e8f4fb;
+    --blue-border:   #bee2f5;
+
+    --bg-page:       #f0f4f8;
+    --bg-card:       #ffffff;
+
+    --text-dark:     #1c2b3a;
+    --text-body:     #3d5166;
+    --text-muted:    #8fa3b1;
+
+    --radius-card:   16px;
+    --radius-input:  10px;
+    --radius-btn:    10px;
+
+    --shadow-card:   0 8px 32px rgba(59,158,218,0.10), 0 2px 8px rgba(0,0,0,0.05);
+    --shadow-btn:    0 4px 16px rgba(59,158,218,0.30);
+
+    --font: 'Plus Jakarta Sans', sans-serif;
+    --transition: 160ms ease;
+}
+
+/* --- Base --- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: var(--font);
+    background: var(--bg-page);
+    background-image:
+        radial-gradient(circle at 10% 15%, rgba(59,158,218,0.07) 0%, transparent 45%),
+        radial-gradient(circle at 90% 85%, rgba(46,134,199,0.06) 0%, transparent 45%);
+    color: var(--text-body);
+    min-height: 100vh;
+    padding-bottom: 3rem;
+}
+
+/* ============================================================
+   Encabezado
+   ============================================================ */
+.site-header {
+    background: #fff;
+    border-bottom: 1.5px solid var(--blue-border);
+    box-shadow: 0 1px 8px rgba(59,158,218,0.08);
+    padding: 0 2rem;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.brand-icon {
+    width: 38px;
+    height: 38px;
+    background: linear-gradient(135deg, var(--blue-primary), var(--blue-dark));
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+}
+
+.brand-name {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    letter-spacing: -0.02em;
+}
+
+/* ============================================================
+   Layout principal
+   ============================================================ */
+.main-content {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* ============================================================
+   Tarjeta de sección
+   ============================================================ */
+.section-card {
+    background: var(--bg-card);
+    border: 1.5px solid var(--blue-border);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+    overflow: hidden;
+    animation: fadeUp 0.4s cubic-bezier(0.22,1,0.36,1) both;
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.section-card:nth-child(2) { animation-delay: 0.05s; }
+.section-card:nth-child(3) { animation-delay: 0.10s; }
+.section-card:nth-child(4) { animation-delay: 0.15s; }
+.section-card:nth-child(5) { animation-delay: 0.20s; }
+
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 1.1rem 1.5rem;
+    background: var(--blue-light);
+    border-bottom: 1.5px solid var(--blue-border);
+}
+
+.section-header-icon {
+    width: 32px;
+    height: 32px;
+    background: linear-gradient(135deg, var(--blue-primary), var(--blue-dark));
+    border-radius: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 0.95rem;
+    flex-shrink: 0;
+}
+
+.section-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    letter-spacing: -0.015em;
+    margin: 0;
+}
+
+.section-body {
+    padding: 1.5rem;
+}
+
+/* ============================================================
+   Inputs y selects
+   ============================================================ */
+.field-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.field-input,
+input.form-control,
+select.form-control {
+    width: 100%;
+    padding: 0.6rem 0.9rem;
+    border: 1.5px solid #d0dfe9;
+    border-radius: var(--radius-input);
+    font-family: var(--font);
+    font-size: 0.88rem;
+    color: var(--text-dark);
+    background: #fafcfe;
+    box-shadow: 0 1px 4px rgba(59,158,218,0.06);
+    outline: none;
+    transition: border-color var(--transition), box-shadow var(--transition), background var(--transition);
+    appearance: none;
+}
+
+input.form-control::placeholder,
+input[type="text"]::placeholder,
+input[type="email"]::placeholder,
+input[type="number"]::placeholder {
+    color: var(--text-muted);
+}
+
+input.form-control:focus,
+select.form-control:focus,
+.field-input:focus {
+    border-color: var(--blue-primary);
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(59,158,218,0.14);
+}
+
+input[type="hidden"] { display: none; }
+
+/* ============================================================
+   Botones
+   ============================================================ */
+.btn-actions {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.25rem;
+}
+
+.btn.btn-success,
+button.btn-success {
+    background: linear-gradient(135deg, #34c774, #1fa85c);
+    border: none;
+    border-radius: var(--radius-btn);
+    font-family: var(--font);
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: #fff;
+    padding: 0.55rem 1.1rem;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(52,199,116,0.28);
+    transition: opacity var(--transition), transform var(--transition), box-shadow var(--transition);
+}
+
+.btn.btn-success:hover,
+button.btn-success:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(52,199,116,0.36);
+}
+
+.btn.btn-primary,
+button.btn-primary {
+    background: linear-gradient(135deg, var(--blue-primary), var(--blue-dark));
+    border: none;
+    border-radius: var(--radius-btn);
+    font-family: var(--font);
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: #fff;
+    padding: 0.55rem 1.1rem;
+    cursor: pointer;
+    box-shadow: var(--shadow-btn);
+    transition: opacity var(--transition), transform var(--transition), box-shadow var(--transition);
+}
+
+.btn.btn-primary:hover,
+button.btn-primary:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(59,158,218,0.40);
+}
+
+.btn.btn-danger,
+button.btn-danger {
+    background: linear-gradient(135deg, #f05a5a, #c93030);
+    border: none;
+    border-radius: var(--radius-btn);
+    font-family: var(--font);
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #fff;
+    padding: 0.38rem 0.8rem;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(240,90,90,0.25);
+    transition: opacity var(--transition), transform var(--transition);
+}
+
+.btn.btn-danger:hover,
+button.btn-danger:hover {
+    opacity: 0.88;
+    transform: translateY(-1px);
+}
+
+.btn.btn-warning,
+button.btn-warning {
+    background: linear-gradient(135deg, #f5a623, #d4850a);
+    border: none;
+    border-radius: var(--radius-btn);
+    font-family: var(--font);
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #fff;
+    padding: 0.38rem 0.8rem;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(245,166,35,0.25);
+    transition: opacity var(--transition), transform var(--transition);
+}
+
+.btn.btn-warning:hover,
+button.btn-warning:hover {
+    opacity: 0.88;
+    transform: translateY(-1px);
+}
+
+/* ============================================================
+   Tabla
+   ============================================================ */
+.table-wrapper {
+    overflow-x: auto;
+    border-radius: 10px;
+    border: 1.5px solid var(--blue-border);
+}
+
+table.table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+}
+
+table.table thead tr {
+    background: var(--blue-light);
+}
+
+table.table thead th {
+    padding: 0.7rem 1rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--blue-dark);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    border-bottom: 1.5px solid var(--blue-border);
+    white-space: nowrap;
+}
+
+table.table tbody tr {
+    border-bottom: 1px solid #e8f0f6;
+    transition: background var(--transition);
+}
+
+table.table tbody tr:last-child {
+    border-bottom: none;
+}
+
+table.table tbody tr:hover {
+    background: #f4f9fd;
+}
+
+table.table tbody td {
+    padding: 0.65rem 1rem;
+    color: var(--text-body);
+    vertical-align: middle;
+}
+
+table.table.table-bordered {
+    border: none;
+}
+
+table.table.table-bordered th,
+table.table.table-bordered td {
+    border: none;
+    border-bottom: 1px solid #e8f0f6;
+}
+
+/* ============================================================
+   Divisor entre secciones (reemplaza <hr>)
+   ============================================================ */
+hr {
+    display: none;
+}
+
+/* ============================================================
+   Responsivo
+   ============================================================ */
+@media (max-width: 600px) {
+    .section-body { padding: 1rem; }
+    .main-content { padding: 1.25rem 0.75rem; }
+    .field-row { grid-template-columns: 1fr; }
+    .brand-name { font-size: 0.9rem; }
+}

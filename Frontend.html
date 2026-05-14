@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Citas Médicas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+    <!-- Encabezado -->
+    <header class="site-header">
+        <div class="brand">
+            <div class="brand-icon">✚</div>
+            <span class="brand-name">Sistema de Citas Médicas</span>
+        </div>
+    </header>
+
+    <div class="main-content">
+
+        <!-- ── Especialidades ── -->
+        <div class="section-card">
+            <div class="section-header">
+                <div class="section-header-icon">🩺</div>
+                <h2 class="section-title">Especialidades</h2>
+            </div>
+            <div class="section-body">
+                <input type="hidden" id="id_especialidad">
+                <div class="field-row">
+                    <input class="form-control" type="text" id="nombre_especialidad" placeholder="Nombre especialidad">
+                    <input class="form-control" type="text" id="descripcion_especialidad" placeholder="Descripción">
+                </div>
+                <div class="btn-actions">
+                    <button class="btn btn-success" onclick="guardarEspecialidad()">+ Crear Especialidad</button>
+                    <button class="btn btn-primary" onclick="editarEspecialidad()">Editar Especialidad</button>
+                </div>
+                <div class="table-wrapper">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Descripción</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaespecialidades"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── Doctores ── -->
+        <div class="section-card">
+            <div class="section-header">
+                <div class="section-header-icon">👨‍⚕️</div>
+                <h2 class="section-title">Doctores</h2>
+            </div>
+            <div class="section-body">
+                <input type="hidden" id="id_doctor">
+                <div class="field-row">
+                    <input class="form-control" type="text" id="nombre_doctor" placeholder="Nombre">
+                    <input class="form-control" type="text" id="apellido_doctor" placeholder="Apellido">
+                    <input class="form-control" type="text" id="telefono_doctor" placeholder="Teléfono">
+                    <input class="form-control" type="email" id="correo_doctor" placeholder="Correo">
+                    <input class="form-control" type="number" id="id_especialidad_doctor" placeholder="ID Especialidad">
+                </div>
+                <div class="btn-actions">
+                    <button class="btn btn-success" onclick="guardarDoctor()">+ Crear Doctor</button>
+                    <button class="btn btn-primary" onclick="editarDoctor()">Editar Doctor</button>
+                </div>
+                <div class="table-wrapper">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Apellido</th>
+                                <th>Teléfono</th>
+                                <th>Correo</th>
+                                <th>Especialidad</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabladoctores"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── Pacientes ── -->
+        <div class="section-card">
+            <div class="section-header">
+                <div class="section-header-icon">🧑‍🤝‍🧑</div>
+                <h2 class="section-title">Pacientes</h2>
+            </div>
+            <div class="section-body">
+                <input type="hidden" id="id_paciente">
+                <div class="field-row">
+                    <input class="form-control" type="text" id="nombre_paciente" placeholder="Nombre">
+                    <input class="form-control" type="text" id="apellido_paciente" placeholder="Apellido">
+                    <input class="form-control" type="date" id="fecha_nacimiento">
+                    <input class="form-control" type="text" id="telefono_paciente" placeholder="Teléfono">
+                    <input class="form-control" type="email" id="correo_paciente" placeholder="Correo">
+                    <input class="form-control" type="text" id="direccion_paciente" placeholder="Dirección">
+                </div>
+                <div class="btn-actions">
+                    <button class="btn btn-success" onclick="guardarPaciente()">+ Crear Paciente</button>
+                    <button class="btn btn-primary" onclick="editarPaciente()">Editar Paciente</button>
+                </div>
+                <div class="table-wrapper">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Apellido</th>
+                                <th>Fecha Nacimiento</th>
+                                <th>Teléfono</th>
+                                <th>Correo</th>
+                                <th>Dirección</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablapacientes"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── Consultorios ── -->
+        <div class="section-card">
+            <div class="section-header">
+                <div class="section-header-icon">🏥</div>
+                <h2 class="section-title">Consultorios</h2>
+            </div>
+            <div class="section-body">
+                <input type="hidden" id="id_consultorio">
+                <div class="field-row">
+                    <input class="form-control" type="text" id="numero_consultorio" placeholder="Número consultorio">
+                    <select class="form-control" id="disponible">
+                        <option value="true">Disponible</option>
+                        <option value="false">No disponible</option>
+                    </select>
+                </div>
+                <div class="btn-actions">
+                    <button class="btn btn-success" onclick="guardarConsultorio()">+ Crear Consultorio</button>
+                    <button class="btn btn-primary" onclick="editarConsultorio()">Editar Consultorio</button>
+                </div>
+                <div class="table-wrapper">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Número</th>
+                                <th>Disponible</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaconsultorios"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── Citas ── -->
+        <div class="section-card">
+            <div class="section-header">
+                <div class="section-header-icon">📅</div>
+                <h2 class="section-title">Citas</h2>
+            </div>
+            <div class="section-body">
+                <input type="hidden" id="id_cita">
+                <div class="field-row">
+                    <input class="form-control" type="date" id="fecha">
+                    <input class="form-control" type="time" id="hora">
+                    <input class="form-control" type="text" id="motivo" placeholder="Motivo">
+                    <input class="form-control" type="text" id="estado" placeholder="Estado">
+                    <input class="form-control" type="number" id="id_paciente_cita" placeholder="ID Paciente">
+                    <input class="form-control" type="number" id="id_doctor_cita" placeholder="ID Doctor">
+                    <input class="form-control" type="number" id="id_consultorio_cita" placeholder="ID Consultorio">
+                </div>
+                <div class="btn-actions">
+                    <button class="btn btn-success" onclick="guardarCita()">+ Crear Cita</button>
+                    <button class="btn btn-primary" onclick="editarCita()">Editar Cita</button>
+                </div>
+                <div class="table-wrapper">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Fecha</th>
+                                <th>Hora</th>
+                                <th>Motivo</th>
+                                <th>Estado</th>
+                                <th>Paciente</th>
+                                <th>Doctor</th>
+                                <th>Consultorio</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablacitas"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div><!-- /main-content -->
+
+    <script src="funciones/Frontend.js"></script>
+</body>
+</html>
